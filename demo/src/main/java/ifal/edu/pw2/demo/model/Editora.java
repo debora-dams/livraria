@@ -10,15 +10,15 @@ public class Editora {
 
 	@Id
 	@GeneratedValue
-	private Integer codigo;
+	private Integer idEditora;
 	@Column
 	private String tefefone;
 	@Column
 	private String nome;
 
-	public Editora(Integer codigo, String tefefone, String nome) {
+	public Editora(Integer idEditora, String tefefone, String nome) {
 		super();
-		this.codigo = codigo;
+		this.idEditora = idEditora;
 		this.tefefone = tefefone;
 		this.nome = nome;
 	}
@@ -28,11 +28,11 @@ public class Editora {
 	}
 
 	public Integer getCodigo() {
-		return codigo;
+		return idEditora;
 	}
 
 	public void setCodigo(Integer codigo) {
-		this.codigo = codigo;
+		this.idEditora = codigo;
 	}
 
 	public String getTefefone() {
