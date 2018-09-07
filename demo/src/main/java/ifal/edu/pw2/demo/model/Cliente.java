@@ -14,6 +14,8 @@ public class Cliente {
 	@Id
 	@GeneratedValue
 	private Integer idCliente;
+	@Column
+	private String nome;
 	@Column(unique = true)
 	private String cpf;
 	@Column
@@ -23,6 +25,22 @@ public class Cliente {
 
 	public Cliente() {
 
+	}
+
+	public Integer getIdCliente() {
+		return idCliente;
+	}
+
+	public void setIdCliente(Integer idCliente) {
+		this.idCliente = idCliente;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getCpf() {
@@ -49,15 +67,19 @@ public class Cliente {
 		this.listaDeLivros = listaDeLivros;
 	}
 
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((cpf == null) ? 0 : cpf.hashCode());
+		result = prime * result + ((idCliente == null) ? 0 : idCliente.hashCode());
 		result = prime * result + ((listaDeLivros == null) ? 0 : listaDeLivros.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
 		return result;
 	}
 
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -71,10 +93,20 @@ public class Cliente {
 				return false;
 		} else if (!cpf.equals(other.cpf))
 			return false;
+		if (idCliente == null) {
+			if (other.idCliente != null)
+				return false;
+		} else if (!idCliente.equals(other.idCliente))
+			return false;
 		if (listaDeLivros == null) {
 			if (other.listaDeLivros != null)
 				return false;
 		} else if (!listaDeLivros.equals(other.listaDeLivros))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
 			return false;
 		if (telefone == null) {
 			if (other.telefone != null)
