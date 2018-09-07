@@ -1,29 +1,45 @@
 package ifal.edu.pw2.demo.model;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Livro {
 
 	@Id
 	@GeneratedValue
-	private Integer id;
+	private Integer idLivro;
+
+	@Column
+	private String nome;
+
 	@Column(unique = true)
 	private String isbn;
-	// Marca do atributo composto
-	@Embedded
-	private Autor autor;
+
+	@OneToOne
+	@JoinColumn(name = "idAutor")
+	private Autor autorLivro;
+
 	@Column
-	private String descricao;
+	private double valor;
+
 	@Column
-	private String estoqueDeLivros;
+	private double estoqueDeLivros;
 
 	public Livro() {
 
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getIsbn() {
@@ -34,38 +50,51 @@ public class Livro {
 		this.isbn = isbn;
 	}
 
-	public Autor getAutor() {
-		return autor;
+	public Autor getAutorLivro() {
+		return autorLivro;
 	}
 
-	public void setAutor(Autor autor) {
-		this.autor = autor;
+	public void setAutorLivro(Autor autorLivro) {
+		this.autorLivro = autorLivro;
 	}
 
-	public String getDescricao() {
-		return descricao;
-	}
-
-	public void setDescricao(String descricao) {
-		this.descricao = descricao;
-	}
-
-	public String getEstoqueDeLivros() {
+	public double getEstoqueDeLivros() {
 		return estoqueDeLivros;
 	}
 
-	public void setEstoqueDeLivros(String estoqueDeLivros) {
+	public void setEstoqueDeLivros(double estoqueDeLivros) {
 		this.estoqueDeLivros = estoqueDeLivros;
+	}
+
+	public Integer getIdLivro() {
+		return idLivro;
+	}
+
+	public void setIdLivro(Integer idLivro) {
+		this.idLivro = idLivro;
+	}
+
+	public double getValor() {
+		return valor;
+	}
+
+	public void setValor(double valor) {
+		this.valor = valor;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((autor == null) ? 0 : autor.hashCode());
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((estoqueDeLivros == null) ? 0 : estoqueDeLivros.hashCode());
+		result = prime * result + ((autorLivro == null) ? 0 : autorLivro.hashCode());
+		long temp;
+		temp = Double.doubleToLongBits(estoqueDeLivros);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((idLivro == null) ? 0 : idLivro.hashCode());
 		result = prime * result + ((isbn == null) ? 0 : isbn.hashCode());
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		temp = Double.doubleToLongBits(valor);
+		result = prime * result + (int) (temp ^ (temp >>> 32));
 		return result;
 	}
 
@@ -78,25 +107,29 @@ public class Livro {
 		if (getClass() != obj.getClass())
 			return false;
 		Livro other = (Livro) obj;
-		if (autor == null) {
-			if (other.autor != null)
+		if (autorLivro == null) {
+			if (other.autorLivro != null)
 				return false;
-		} else if (!autor.equals(other.autor))
+		} else if (!autorLivro.equals(other.autorLivro))
 			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
-				return false;
-		} else if (!descricao.equals(other.descricao))
+		if (Double.doubleToLongBits(estoqueDeLivros) != Double.doubleToLongBits(other.estoqueDeLivros))
 			return false;
-		if (estoqueDeLivros == null) {
-			if (other.estoqueDeLivros != null)
+		if (idLivro == null) {
+			if (other.idLivro != null)
 				return false;
-		} else if (!estoqueDeLivros.equals(other.estoqueDeLivros))
+		} else if (!idLivro.equals(other.idLivro))
 			return false;
 		if (isbn == null) {
 			if (other.isbn != null)
 				return false;
 		} else if (!isbn.equals(other.isbn))
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		if (Double.doubleToLongBits(valor) != Double.doubleToLongBits(other.valor))
 			return false;
 		return true;
 	}
